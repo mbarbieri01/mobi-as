@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>MOBI-AS admin panel</h1>
+
+
+
+
+		
+		<h:form>
+			<p>
+				<h:commandButton id="login" action="#{myManagedBean.login()}"
+					value="Login"/>
+				<h:outputText value=" YES" rendered="#{myManagedBean.auth}"
+					style="color: green;" />
+			</p>
+			<p>
+				<h:commandButton id="logout" action="#{myManagedBean.logout()}"
+					value="Logout"/>
+				<h:outputText value=" NO" rendered="#{myManagedeBean.auth}"
+					style="color: green;" />
+			</p>
+			<p>
+				<h:commandButton id="test" action="#{myManagedBean.test()}"
+					value="Test" />
+			</p>
+		</h:form>
+		<h2>Members</h2>
+		<h:panelGroup rendered="#{empty companies}">
+			<em>No registered companies.</em>
+		</h:panelGroup>
+		<h:dataTable var="_company" value="#{companies}"
+			rendered="#{not empty companies}">
+			<h:column>
+				<f:facet name="header">clientID</f:facet>
+                #{_company.clientID}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+                #{_company.name}
+            </h:column>
+			<h:column>
+				<f:facet name="header">AziDesc</f:facet>
+                #{_company.aziDesc}
+            </h:column>
+			<h:column>
+				<f:facet name="header">nRequest</f:facet>
+                #{_company.NRequest}
+            </h:column>
+			<h:column>
+				<f:facet name="header">REST URL</f:facet>
+				<a href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
+			</h:column>
+			<f:facet name="footer">
+                REST URL for all members: <a
+					href="#{request.contextPath}/rest/members">/rest/members</a>
+			</f:facet>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>

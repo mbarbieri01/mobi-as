@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>USER MANAGEMENT</h1>
+
+		<h:form id="reg">
+			<h2>Registra nuovo utente</h2>
+
+			<table>
+				<tr>
+					<th style="text-align: right;"><h:outputLabel for="name"
+							value="Nome:" /></th>
+					<td><h:inputText id="name" value="#{newUser.nome}" /> <h:message
+							for="name" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<th style="text-align: right;"><h:outputLabel for="cognome"
+							value="Cognome:" /></th>
+					<td><h:inputText id="cognome" value="#{newUser.cognome}" /> <h:message
+							for="cognome" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<th style="text-align: right;"><h:outputLabel for="azienda"
+							value="Azienda:" /></th>
+					<td><h:inputText id="azienda" value="#{newUser.azienda}" /> <h:message
+							for="azienda" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<th style="text-align: right;"><h:outputLabel for="username"
+							value="username:" /></th>
+					<td><h:inputText id="username" value="#{newUser.username}" />
+						<h:message for="username" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<th style="text-align: right;"><h:outputLabel for="password"
+							value="password:" /></th>
+					<td><h:inputSecret id="password" value="#{newUser.password}" />
+						<h:message for="password" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<h:selectManyCheckbox value="#{newUser.favRoles}">
+						<f:selectItems value="#{newUser.rolesValue}" />
+					</h:selectManyCheckbox>
+				</tr>
+			</table>
+			<p>
+				<h:commandButton id="register" action="#{userRegistration.register}"
+					value="Registra" />
+				<h:outputText value=" Registrato"
+					rendered="#{facesContext.postback and empty facesContext.messageList}"
+					style="color: green;" />
+			</p>
+
+		</h:form>
+
+		<h:dataTable var="_user" value="#{users}"
+			rendered="#{not empty users}">
+
+			<h:column>
+				<f:facet name="header">username</f:facet>
+                #{_user.username}
+
+            </h:column>
+			<h:column>
+				<f:facet name="header">Cognome</f:facet>
+                #{_user.cognome}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+                #{_user.nome}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Azienda</f:facet>
+                #{_user.azienda}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Roles</f:facet>
+                #{_user.stringRoles}
+            </h:column>
+
+		</h:dataTable>
+	</ui:define>
+</ui:composition>

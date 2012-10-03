@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+   <title>Mobi-as admin panel</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <h:outputStylesheet name="css/screen.css" />
+</h:head>
+<h:body>
+   <div id="container">
+      <div id="content">
+         <div id="sidebar">
+            <h3>MOBI-AS admin panel</h3>
+            <p>Amministra backend MOBI-AS</p>
+            <ul>
+            <li><h:link outcome="index.xhtml" value="HOME" /></li>
+            </ul>
+            <ul>
+            <li><h:link outcome="users.xhtml" value="USERS" /></li>
+            </ul>
+
+            
+         </div>
+         <ui:insert name="content">
+                    [Template content will be inserted here]
+                </ui:insert>
+      </div>
+      <div id="footer">
+         <h:graphicImage value="/resources/gfx/logoCESACO.gif" alt="Weld logo" />
+         <p>
+            Progetto creato da CESACO S.r.l.<br />
+         </p>
+      </div>
+   </div>
+</h:body>
+</html>

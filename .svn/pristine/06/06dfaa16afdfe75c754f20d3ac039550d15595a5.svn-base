@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Welcome to JBoss AS 7!</h1>
+
+		<p>You have successfully deployed a Java EE 6 web application on
+			JBoss AS 7.</p>
+
+		<h:form id="reg">
+			<h2>Register (Bean Validation example)</h2>
+			<p>Enforces annotation-based constraints defined on the model
+				class.</p>
+			<table>
+				<tr>
+					<th style="text-align: right;"><h:outputLabel for="name"
+							value="Name:" /></th>
+					<td><h:inputText id="name" value="#{newFlow.name}" /> <h:message
+							for="name" errorClass="invalid" /></td>
+				</tr>
+
+			</table>
+			<p>
+				<h:commandButton id="register" action="#{flowManager.register()}"
+					value="Register" />
+				<h:outputText value=" Registered!"
+					rendered="#{facesContext.postback and empty facesContext.messageList}"
+					style="color: green;" />
+			</p>
+		</h:form>
+		<h2>Members</h2>
+		<h:panelGroup rendered="#{empty flows}">
+			<em>No registered members.</em>
+		</h:panelGroup>
+		<h:dataTable var="_flow" value="#{flows}"
+			rendered="#{not empty flows}">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+                #{_flow.id}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+                #{_flow.name}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Tipo</f:facet>
+                #{_flow.type}
+            </h:column>
+
+			<f:facet name="footer">
+                REST URL for all members: <a
+					href="#{request.contextPath}/rest/members">/rest/members</a>
+			</f:facet>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>
